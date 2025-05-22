@@ -62,27 +62,24 @@ id="header">
 			data-kt-dropdown-placement-rtl="bottom-start" data-kt-dropdown-trigger="click">
 			<div class="cursor-pointer shrink-0" data-kt-dropdown-toggle="true">
 				<img alt="" class="size-9 rounded-full border-2 border-green-500 shrink-0"
-					src="assets/media/avatars/300-2.png" />
+					src="assets/media/avatars/user.png" />
 			</div>
 			<div class="kt-dropdown-menu w-[250px]" data-kt-dropdown-menu="true">
 				<div class="flex items-center justify-between px-2.5 py-1.5 gap-1.5">
 					<div class="flex items-center gap-2">
 						<img alt=""
 							class="size-9 shrink-0 rounded-full border-2 border-green-500"
-							src="assets/media/avatars/300-2.png" />
+							src="assets/media/avatars/user.png" />
 						<div class="flex flex-col gap-1.5">
 							<span class="text-sm text-foreground font-semibold leading-none">
-								Cody Fisher
+								{{ Auth::user()->name }}
 							</span>
 							<a class="text-xs text-secondary-foreground hover:text-primary font-medium leading-none"
 								href="html/demo1/account/home/get-started.html">
-								c.fisher@gmail.com
+								{{ Auth::user()->email }}
 							</a>
 						</div>
 					</div>
-					<span class="kt-badge kt-badge-sm kt-badge-primary kt-badge-outline">
-						Pro
-					</span>
 				</div>
 				<ul class="kt-dropdown-menu-sub">
 					<li>

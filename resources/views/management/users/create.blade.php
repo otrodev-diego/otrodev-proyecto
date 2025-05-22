@@ -56,7 +56,7 @@
                             <span
                                 class="flex w-1.5 relative before:absolute before:top-0 before:size-1.5 before:rounded-full before:-translate-x-2/4 before:-translate-y-2/4 kt-scrollspy-active:before:bg-primary">
                             </span>
-                            Delete Account
+                            Eliminación cuenta
                         </a>
                     </div>
                 </div>
@@ -87,6 +87,9 @@
                                         class="kt-input w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
                                         type="text" name="name" placeholder="Nombre usuario"
                                         value="{{ old('name', isset($user) ? $user->name : '') }}" required />
+                                        @error('password_confirmation')
+                                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                                 </div>
                             </div>
 
@@ -99,6 +102,9 @@
                                         class="kt-input w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
                                         type="email" name="email" placeholder="Email usuario"
                                         value="{{ old('email', isset($user) ? $user->email : '') }}" required />
+                                        @error('password_confirmation')
+                                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                                 </div>
                             </div>
                             <div class="w-full">
@@ -114,6 +120,9 @@
                                                 {{ $rol }}</option>
                                         @endforeach
                                     </select>
+                                    @error('password_confirmation')
+                                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                                 </div>
                             </div>
 
@@ -123,7 +132,7 @@
                                     Save Changes
                                 </button>
                             </div>
-                        </form>
+                        
                     </div>
                 </div>
                 <div class="kt-card">
@@ -138,8 +147,10 @@
                                 <label class="kt-form-label max-w-56">
                                     New Password
                                 </label>
-                                <input class="kt-input" placeholder="New password" type="text" value="">
-                                </input>
+                                <input name="password" class="kt-input" placeholder="New password" type="password" value="">
+                                @error('password')
+                                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div class="w-full">
@@ -147,52 +158,45 @@
                                 <label class="kt-form-label max-w-56">
                                     Confirm New Password
                                 </label>
-                                <input class="kt-input" placeholder="Confirm new password" type="text" value="">
-                                </input>
+                                <input name="password_confirmation" class="kt-input" placeholder="Confirm new password" type="password" value="">
+                                @error('password_confirmation')
+                                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
-                        </div>
-                        <div class="flex justify-end pt-2.5">
-                            <button class="kt-btn kt-btn-primary">
-                                Reset Password
-                            </button>
                         </div>
                     </div>
                 </div>
 
+            </form>
 
+                @if (isset($user))
                 <div class="kt-card">
                     <div class="kt-card-header" id="delete_account">
                         <h3 class="kt-card-title">
-                            Delete Account
+                            Eliminación cuenta
                         </h3>
                     </div>
                     <div class="kt-card-content flex flex-col lg:py-7.5 lg:gap-7.5 gap-3">
                         <div class="flex flex-col gap-5">
                             <div class="text-sm text-foreground">
-                                We regret to see you leave. Confirm account deletion below. Your data will be permanently
-                                removed. Thank you for being part of our
-                                community. Please check our
-                                <a class="kt-link" href="#">
-                                    Setup Guidelines
-                                </a>
-                                if you still wish continue.
+                                Esta acción eliminará permanentemente la cuenta del usuario. Todos sus datos serán
+                                eliminados de forma irreversible. Gracias por haber formado parte de nuestra comunidad. Si
+                                está seguro de continuar, confirme la eliminación a continuación. Para más información,
+                                consulte nuestras Directrices de configuración.
                             </div>
-                            <label class="kt-label">
-                                <input class="kt-checkbox kt-checkbox-sm" name="delete" type="checkbox" value="1">
-                                Confirm deleting account
-                                </input>
-                            </label>
                         </div>
                         <div class="flex justify-end gap-2.5">
-                            <button class="kt-btn kt-btn-outline">
-                                Deactivate Instead
+                            
                                 <button class="kt-btn kt-btn-destructive">
-                                    Delete Account
+                                    Eliminar cuenta
                                 </button>
-                            </button>
+                           
                         </div>
                     </div>
                 </div>
+                @endif
+
+                
             </div>
         </div>
     </div>

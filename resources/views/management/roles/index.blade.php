@@ -66,35 +66,13 @@
                             </button>
                             <div class="kt-menu-dropdown kt-menu-default w-full max-w-[175px]" data-kt-menu-dismiss="true">
                                 <div class="kt-menu-item">
-                                    <a class="kt-menu-link" href="#">
+                                    <a class="kt-menu-link" href="{{ route('roles.edit', $rol->id) }}">
                                         <span class="kt-menu-icon">
                                             <i class="ki-filled ki-document">
                                             </i>
                                         </span>
                                         <span class="kt-menu-title">
                                             Editar
-                                        </span>
-                                    </a>
-                                </div>
-                                <div class="kt-menu-item">
-                                    <a class="kt-menu-link" data-kt-modal-toggle="#share_profile_modal" href="#">
-                                        <span class="kt-menu-icon">
-                                            <i class="ki-filled ki-share">
-                                            </i>
-                                        </span>
-                                        <span class="kt-menu-title">
-                                            Share
-                                        </span>
-                                    </a>
-                                </div>
-                                <div class="kt-menu-item">
-                                    <a class="kt-menu-link" href="#">
-                                        <span class="kt-menu-icon">
-                                            <i class="ki-filled ki-file-up">
-                                            </i>
-                                        </span>
-                                        <span class="kt-menu-title">
-                                            Export
                                         </span>
                                     </a>
                                 </div>

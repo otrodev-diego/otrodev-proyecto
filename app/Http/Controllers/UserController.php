@@ -40,23 +40,34 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
-            'role' => ['required']
-            //'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => ['required'],
+            'password' => [
+                'nullable',
+                'confirmed',
+                Rules\Password::defaults(),
+                'required_with:password_confirmation',
+            ],
+            'password_confirmation' => [
+                'nullable',
+                'required_with:password',
+            ],
         ]);
-
+    
+        $password = $request->filled('password')
+            ? Hash::make($request->password)
+            : Hash::make('hola123'); // O puedes lanzar error si no quieres clave por defecto
+    
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            //'password' => Hash::make($request->password),
-            'password' => Hash::make('hola123'),
+            'password' => $password,
         ]);
-
+    
         $user->assignRole($request->input('role'));
-
+    
         return redirect()
             ->route('users.index')
             ->with('success', 'Usuario registrado correctamente.');
