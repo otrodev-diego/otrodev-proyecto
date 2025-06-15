@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Password;
+use App\Notifications\UserInvitationNotification;
 
 class UserController extends Controller
 {
@@ -48,26 +51,23 @@ class UserController extends Controller
                 'nullable',
                 'confirmed',
                 Rules\Password::defaults(),
-                'required_with:password_confirmation',
-            ],
-            'password_confirmation' => [
-                'nullable',
-                'required_with:password',
             ],
         ]);
-    
+
         $password = $request->filled('password')
             ? Hash::make($request->password)
-            : Hash::make('hola123'); // O puedes lanzar error si no quieres clave por defecto
-    
+            : Hash::make('hola123'); // clave por defecto si no se envía ninguna
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => $password,
         ]);
-    
+
         $user->assignRole($request->input('role'));
-    
+        $token = Password::createToken($user);
+        $user->notify(new UserInvitationNotification($token));
+
         return redirect()
             ->route('users.index')
             ->with('success', 'Usuario registrado correctamente.');
@@ -93,22 +93,36 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $rules = [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email,' . $id],
-            'role' => ['required']
-        ]);
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique('users', 'email')->ignore($id)],
+            'role' => ['required'],
+        ];
 
-        $user = User::find($id);
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
+        // Solo agregar validación de password si se está enviando
+        if ($request->filled('password') || $request->filled('password_confirmation')) {
+            $rules['password'] = ['confirmed', Rules\Password::defaults()];
+        }
+
+        $request->validate($rules);
+
+        $user = User::findOrFail($id);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        // Solo actualizar la contraseña si se envía
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
 
         $user->syncRoles([$request->input('role')]);
 
         return redirect()->route('users.index')->with('success', 'Usuario actualizado correctamente.');
     }
+
 
 
     /**
