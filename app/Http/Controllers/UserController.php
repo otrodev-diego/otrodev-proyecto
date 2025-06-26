@@ -88,7 +88,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $roles = Role::pluck('name', 'name')->all();
-        return view('management.users.create', compact('user', 'roles'));
+        return view('management.users.edit', compact('user', 'roles'));
     }
 
     public function update(Request $request, $id)

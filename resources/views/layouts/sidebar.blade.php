@@ -2,11 +2,11 @@
     data-kt-drawer="true" data-kt-drawer-class="kt-drawer kt-drawer-start top-0 bottom-0" id="sidebar">
     <div class="kt-sidebar-header hidden lg:flex items-center relative justify-between px-3 lg:px-6 shrink-0"
         id="sidebar_header">
-        <a class="dark:hidden" href="html/demo1.html">
+        <a class="dark:hidden" href="/">
             <img class="default-logo min-h-[22px] max-w-none" src="assets/media/app/default-logo.svg" />
             <img class="small-logo min-h-[22px] max-w-none" src="assets/media/app/mini-logo.svg" />
         </a>
-        <a class="hidden" href="html/demo1.html">
+        <a class="hidden" href="/">
             <img class="default-logo min-h-[22px] max-w-none" src="assets/media/app/default-logo-dark.svg" />
             <img class="small-logo min-h-[22px] max-w-none" src="assets/media/app/mini-logo.svg" />
         </a>
@@ -98,7 +98,7 @@
                         </div>
                         <div class="kt-menu-item">
                             <a class="kt-menu-link border border-transparent items-center grow kt-menu-item-active:bg-accent/60 kt-menu-item-active:rounded-lg hover:bg-accent/60 hover:rounded-lg gap-[14px] ps-[10px] pe-[10px] py-[8px]"
-                                href="html/demo1/public-profile/teams.html" tabindex="0">
+                                href="{{ route('tenant.index') }}" tabindex="0">
                                 <span
                                     class="kt-menu-bullet flex w-[6px] -start-[3px] rtl:start-0 relative before:absolute before:top-0 before:size-[6px] before:rounded-full rtl:before:translate-x-1/2 before:-translate-y-1/2 kt-menu-item-active:before:bg-primary kt-menu-item-hover:before:bg-primary">
                                 </span>

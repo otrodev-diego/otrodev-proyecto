@@ -48,4 +48,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    public function scopeByCompany($query)
+    {
+        return $query->where('company_id', auth()->user()->company_id);
+    }
+
 }

@@ -15,20 +15,34 @@ class SuperAdminSeeder extends Seeder
      */
     public function run(): void
     {
-        $role = Role::firstOrCreate(
-            ['name' => 'Super Admin', 'guard_name' => 'web']
-        );
+        // Crear la empresa
+        $company = \App\Models\Company::create([
+            'name' => 'Empresa Principal',
+            'rut' => '76.XXXX.XXX-X',
+            'address' => 'Dirección de ejemplo',
+            'phone' => '123456789',
+            'email' => 'info@empresa.com',
+            'logo' => 'ruta/al/logo.png',
+            'description' => 'Descripción de la empresa',
+            'active' => true,
+        ]);
 
-        // Crear usuario si no existe
+        // Crear el usuario
         $user = User::firstOrCreate(
             ['email' => 'superadmin@otrodev.cl'],
             [
                 'name' => 'Super Admin',
                 'password' => Hash::make('test.123'),
+                'company_id' => $company->id, // Asignar la empresa creada
             ]
         );
 
-        // Asignar rol
+        // Crear o recuperar el rol y asignarlo
+        $role = Role::firstOrCreate(
+            ['name' => 'Super Admin', 'guard_name' => 'web'],
+            ['company_id' => $company->id]
+        );
+
         if (!$user->hasRole('Super Admin')) {
             $user->assignRole($role);
         }

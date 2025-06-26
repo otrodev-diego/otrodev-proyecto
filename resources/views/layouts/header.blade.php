@@ -5,7 +5,7 @@ id="header">
 <div class="kt-container-fixed flex justify-between items-stretch lg:gap-4" id="headerContainer">
 	<!-- Mobile Logo -->
 	<div class="flex gap-2.5 lg:hidden items-center -ms-1">
-		<a class="shrink-0" href="html/demo1.html">
+		<a class="shrink-0" href="/">
 			<img class="max-h-[25px] w-full" src="assets/media/app/mini-logo.svg" />
 		</a>
 		<div class="flex items-center">
@@ -37,7 +37,7 @@ id="header">
 					<!--Megamenu Item-->
 					<div class="kt-menu-item active">
 						<a class="kt-menu-link text-nowrap text-sm text-foreground font-medium kt-menu-item-hover:text-primary kt-menu-item-active:text-mono kt-menu-item-active:font-medium"
-							href="html/demo1.html">
+							href="/">
 							<span class="kt-menu-title text-nowrap">
 								Home
 							</span>
@@ -54,7 +54,7 @@ id="header">
 	<!-- Topbar -->
 	<div class="flex items-center gap-2.5">
 
-		
+
 		<!-- End of Apps -->
 		<!-- User -->
 		<div class="shrink-0" data-kt-dropdown="true" data-kt-dropdown-offset="10px, 10px"
@@ -94,9 +94,9 @@ id="header">
 							My Profile
 						</a>
 					</li>
-					
 
-					
+
+
 					<li>
 						<div class="kt-dropdown-menu-separator">
 						</div>
@@ -121,7 +121,7 @@ id="header">
 							Log out
 						</button>
 					</form>
-					
+
 				</div>
 			</div>
 		</div>
